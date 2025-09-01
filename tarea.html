@@ -7,11 +7,11 @@
 </head>
 <body>
     <label for="materia1">Cantidad de estudiantes en Ingles:</label>
-  <input type="number" id="materia1" min="0" max="100">
+  <input type="number" id="materia1" step="1">
   <br><br>
 
   <label for="materia2">Cantidad de estudiantes en Literatura:</label>
-  <input type="number" id="materia2" min="0" max="100">
+  <input type="number" id="materia2" step="1">
   <br><br>
 
   <button onclick="validar()">Validar</button>
@@ -27,15 +27,23 @@
       let resultado = "";
 
       
-      if (isNaN(cantidad1) || isNaN(cantidad2)) {
-        resultado = "Debes ingresar los dos valores.";
-      } else if (cantidad1 > cantidad2) {
-        resultado = "Ingles tiene más estudiantes.";
-      } else if (cantidad2 > cantidad1) {
-        resultado = "Literatura tiene más estudiantes.";
-      } else {
-        resultado = "Ambas materias tienen la misma cantidad de estudiantes.";
-      }
+  if (isNaN(cantidad1) || isNaN(cantidad2)) {
+  resultado = "Debes ingresar los dos valores.";
+  }
+  else if (!Number.isInteger(cantidad1) || !Number.isInteger(cantidad2)) {
+    resultado = "Solo se permiten números enteros.";
+  }
+  else if (cantidad1 < 0 || cantidad1 > 100 || cantidad2 < 0 || cantidad2 > 100) {
+    resultado = "Los valores deben estar entre 0 y 100.";
+  }
+  else if (cantidad1 > cantidad2) {
+    resultado = "Ingles tiene más estudiantes.";
+  } else if (cantidad2 > cantidad1) {
+    resultado = "Literatura tiene más estudiantes.";
+  } else {
+    resultado = "Ambas materias tienen la misma cantidad de estudiantes.";
+  }
+
 
       
       document.getElementById("resultado").textContent = resultado;
